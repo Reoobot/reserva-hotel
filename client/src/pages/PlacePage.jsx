@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BokingWidget from "../BookingWidget";
 
 export default function PlacePage() {
     const {id} = useParams();
@@ -85,23 +86,21 @@ export default function PlacePage() {
                     show more photos
                 </button>
             </div>
-            <div className="my-4">
-                <h2 className="font-semibold text-2xl">Description</h2>
-                {place.description}
-            </div>
-            <div className="grid grid-cols-2">
-                <div>
-                    Checkc-in: {place.checkIn}<br/>
-                    Check-out: {place.checkOut}<br/>
-                    Max number of guests: {place.masGuests}
+                <div className="mt-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]">
+                    <div>
+                      <div className="my-4">
+                        <h2 className="font-semibold text-2xl">Description</h2>
+                        {place.description}
+                      </div>
+                        Checkc-in: {place.checkIn}<br/>
+                        Check-out: {place.checkOut}<br/>
+                        Max number of guests: {place.masGuests}
+                        <div>{place.extraInfo}</div>
+                    </div>
+                    <div className="bg-white shadow p-4 rounded-2xl">
+                  <BokingWidget place={place}/>
                 </div>
-                <div className="bg-white shadow p-4 rounded-2xl">
-                   <div className="text-2xl text-center">
-                        price: Є{place.price} / per night
-                   </div>
-                   <button className="primary">Book this place</button>
-                </div>
-            </div>
+           </div>
         </div>
         
     );
