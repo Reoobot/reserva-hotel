@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser';
 import imageDownloader from 'image-downloader'
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { dirname, resolve } from 'path';
 import multer from 'multer';
 import fs from 'fs'
 import BookingModel from './models/Booking.js';
@@ -40,6 +40,15 @@ app.use(cors({
 
 mongoose.connect(process.env.MONGO_URL);
 
+
+function getUserDataFromToken(req) {
+    return new Promise((resolve,reject)=>{
+        jwt.verify(req.cookies.token,jwtSecret,{},async(err,userData)=>{
+            if(err) throw err;
+           resolve(userData)
+        });
+    });
+}
 
 
 app.get('/test', (req,res) =>{
@@ -218,18 +227,28 @@ app.get('/places',async (req,res)=>{
     res.json( await PlaceModel.find());
 })
 
-app.post('/booking', async (req,res) => {
+app.post('/bookings', async (req,res) => {
+    const userData = await getUserDataFromToken(req);
     const {
         place,checkIn,checkOut,numberOfGuests,name,phone,price,
     } = req.body;
     await BookingModel.create({
         place,checkIn,checkOut,numberOfGuests,name,phone,price,
-    }).then((err,doc)=> {
-        if(err) throw err;
+        user:userData.id,
+    }).then((doc)=> {
         res.json(doc)
+    }).catch((err)=>{
+        throw err;
     })
 
 });
+
+   
+
+app.get('/bookings', async (req,res)=> {
+   const userData = await getUserDataFromToken(req);
+   res.json(await BookingModel.find({user:userData.id}));
+})
 
 app.listen(4001);
 
