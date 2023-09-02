@@ -33,7 +33,7 @@ export default function PlacesFormPage(){
             setAddedPhotos(data.photos)
             setdescription(data.description);
             setPerks(data.perks);
-            setExtraInfo(data.setExtraInfo)
+            setExtraInfo(data.extraInfo)
             setCheckIn(data.checkIn)
             setCheckOut(data.checkOut);
             setMaxGuests(data.maxGuests);
