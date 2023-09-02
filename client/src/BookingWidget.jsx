@@ -1,10 +1,18 @@
-import { set } from "mongoose";
+
 import { useState } from "react";
+import { differenceInCalendarDays } from 'date-fns';
 
 export default function BokingWidget({place}){
     const [checkIn,setCheckIn] = useState('');
     const [checkOut,setCheckOut] = useState('');
     const [numberOfGuests,setNumberOfGuests] = useState(1);
+    const [name,setName] = useState('');
+    const [mobile,setMobile] = useState('');
+
+    let numberOfNights = 0;
+    if(checkIn && checkOut) {
+        numberOfNights = differenceInCalendarDays(new Date(checkOut),new Date(checkIn));
+    }
     return(
      
            <div className="mt-4 bg-white shadow p-4 rounded-2xl">
@@ -33,8 +41,25 @@ export default function BokingWidget({place}){
                                    value={numberOfGuests} 
                                    onChange={ev => setNumberOfGuests(ev.target.value)} />
                         </div>
+                        {numberOfNights > 0 && (
+                             <div className="py-3 px-4 border-t">
+                                <label>Your full name</label>
+                                <input type="text" 
+                                        value={name} 
+                                        onChange={ev => setName(ev.target.value)}/>
+                                 <label>Phone number</label>
+                                <input type="tel" 
+                                        value={mobile} 
+                                        onChange={ev => setMobile(ev.target.value)}/>
+                            </div>
+                        )}
                      </div>
-                    <button className="primary mt-4">Book this place</button>
+                    <button className="primary mt-4">
+                        Book this place
+                        {numberOfNights > 0 && (
+                            <span> Є {numberOfNights * place?.price}</span>
+                        )}
+                    </button>
            </div>
    
     );

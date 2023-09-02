@@ -12,6 +12,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import multer from 'multer';
 import fs from 'fs'
+import BookingModel from './models/Booking.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -216,6 +217,19 @@ app.put('/places', async (req,res)=>{
 app.get('/places',async (req,res)=>{
     res.json( await PlaceModel.find());
 })
+
+app.post('/booking', async (req,res) => {
+    const {
+        place,checkIn,checkOut,numberOfGuests,name,phone,price,
+    } = req.body;
+    await BookingModel.create({
+        place,checkIn,checkOut,numberOfGuests,name,phone,price,
+    }).then((err,doc)=> {
+        if(err) throw err;
+        res.json(doc)
+    })
+
+});
 
 app.listen(4001);
 
