@@ -12,12 +12,13 @@ export default function ProfilePage() {
     if (subpage === undefined) {
         subpage = 'profile';
     }
-    console.log('mi param',subpage);
+   
 
     async function logout() {
         await axios.post('/logout');
         setRedirect('/')
         setUser(null);
+        console.log('miomio',setUser);
     }
 
     if(!ready) {

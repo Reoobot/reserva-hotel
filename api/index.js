@@ -176,7 +176,7 @@ app.get('/user-places', (req, res) => {
         }
 
         const { id } = userData;
-        console.log('Obteniendo lugares del usuario con ID:', id);
+        // console.log('Obteniendo lugares del usuario con ID:', id);
 
         try {
             const places = await PlaceModel.find({ owner: id });
@@ -247,7 +247,7 @@ app.post('/bookings', async (req,res) => {
 
 app.get('/bookings', async (req,res)=> {
    const userData = await getUserDataFromToken(req);
-   res.json(await BookingModel.find({user:userData.id}));
+   res.json(await BookingModel.find({user:userData.id}).populate('place'));
 })
 
 app.listen(4001);
