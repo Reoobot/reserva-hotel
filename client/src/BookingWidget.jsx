@@ -41,52 +41,66 @@ export default function BokingWidget({place}){
   
     return(
      
-           <div className="mt-4 bg-white shadow p-4 rounded-2xl">
-           
-          <div className="text-2xl text-center">
-                            price: Є{place.price} / per night
-                    </div>
-                     <div className="border rounded-2xl mt-4">
-                        <div className="flex">
-                            <div className="py-3 px-4">
-                                <label>Check in:</label>
-                                <input type="date" 
-                                        value={checkIn} 
-                                        onChange={ev => setCheckIn(ev.target.value)}/>
-                            </div>
-                            <div className="py-3 px-4 border-l">
-                                <label>Check out:</label>
-                                <input type="date" 
-                                       value={checkOut} 
-                                       onChange={ev => setCheckOut(ev.target.value)}/>
-                            </div>
-                        </div>
-                        <div className="py-3 px-4 border-t">
-                            <label>Number of guests:</label>
-                            <input type="number" 
-                                   value={numberOfGuests} 
-                                   onChange={ev => setNumberOfGuests(ev.target.value)} />
-                        </div>
-                        {numberOfNights > 0 && (
-                             <div className="py-3 px-4 border-t">
-                                <label>Your full name</label>
-                                <input type="text" 
-                                        value={name} 
-                                        onChange={ev => setName(ev.target.value)}/>
-                                 <label>Phone number</label>
-                                <input type="tel" 
-                                        value={phone} 
-                                        onChange={ev => setPhone(ev.target.value)}/>
-                            </div>
-                        )}
-                     </div>
-                    <button onClick={bookingThisplace} className="primary mt-4">
-                        Book this place
-                        {numberOfNights > 0 && (
-                            <span> Є {numberOfNights * place?.price}</span>
-                        )}
-                    </button>
-           </div>
-   
+        <div className="mt-4 bg-white shadow p-4 rounded-2xl">
+        <div className="text-2xl text-center">
+          Price: Є{place.price} / per night
+        </div>
+        <div className="border rounded-2xl mt-4">
+          <div className="md:flex">
+            <div className="py-3 px-4">
+              <label className="block">Check-in:</label>
+              <input
+                type="date"
+                value={checkIn}
+                onChange={(ev) => setCheckIn(ev.target.value)}
+                className="block w-full border rounded-2xl focus:outline-none focus:ring focus:border-primary"
+              />
+            </div>
+            <div className="py-3 px-4 border-t md:border-t-0 md:border-l">
+              <label className="block">Check-out:</label>
+              <input
+                type="date"
+                value={checkOut}
+                onChange={(ev) => setCheckOut(ev.target.value)}
+                className="block w-full border rounded-2xl focus:outline-none focus:ring focus:border-primary"
+              />
+            </div>
+          </div>
+          <div className="py-3 px-4 border-t">
+            <label className="block">Number of guests:</label>
+            <input
+              type="number"
+              value={numberOfGuests}
+              onChange={(ev) => setNumberOfGuests(ev.target.value)}
+              className="block w-full border rounded-2xl focus:outline-none focus:ring focus:border-primary"
+            />
+          </div>
+          {numberOfNights > 0 && (
+            <div className="py-3 px-4 border-t">
+              <label className="block">Your full name:</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(ev) => setName(ev.target.value)}
+                className="block w-full border rounded-2xl focus:outline-none focus:ring focus:border-primary"
+              />
+              <label className="block">Phone number:</label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(ev) => setPhone(ev.target.value)}
+                className="block w-full border rounded-2xl focus:outline-none focus:ring focus:border-primary"
+              />
+            </div>
+          )}
+        </div>
+        <button onClick={bookingThisplace} className="primary mt-4 w-full">
+          Book this place
+          {numberOfNights > 0 && (
+            <span> Є {numberOfNights * place?.price}</span>
+          )}
+        </button>
+      </div>
+      
     );
 }

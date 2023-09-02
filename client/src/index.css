@@ -18,3 +18,12 @@ button.primary{
     background-color: #F5385D;
     @apply bg-primary p-2 w-full text-white rounded-2xl;
 }
+
+
+/* Estilos para el modo nocturno */
+.dark-mode {
+    background-color: #000;
+    color: #fff;
+    /* Agrega otros estilos de modo nocturno aquí */
+  }
+  
