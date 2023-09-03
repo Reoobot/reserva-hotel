@@ -4,11 +4,13 @@ import axios from "axios";
 import PlaceImg from "../PlaceImg";
 import { Link } from "react-router-dom";
 import BookingDate from "../BookingDate";
+import RunPhotos from "../RunPhotos";
 
 export default function BookingsPage(){
     const [bookings,setBookings] = useState([]);
     useEffect(()=>{
-        axios.get('/bookings').then(response => {
+      //ojoj axios.get('/bookings')
+        axios.get('https://booking-kohl-five.vercel.app/api/bookings').then(response => {
             setBookings(response.data);
         })
     },[])
@@ -23,7 +25,7 @@ export default function BookingsPage(){
           className="flex gap-4 bg-gray-200 rounded-2xl overflow-hidden"
         >
           <div className="w-56">
-            <PlaceImg place={booking.place} />
+            <RunPhotos place={booking.place}/>
           </div>
           <div className="py-3 pr-3 grow">
             <h2 className="text-xl">{booking.place.title}</h2>

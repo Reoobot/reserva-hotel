@@ -33,7 +33,7 @@ export default function BokingWidget({place}){
             price:numberOfNights * place.price
         });
         const bookingId = response.data._id;
-        setRedirect(`/account/bookings/${bookingId}`);
+        setRedirect(`https://booking-sand-two.vercel.app/api/bookings/${bookingId}`);
     }
     if(redirect){
         return <Navigate to={redirect}/>

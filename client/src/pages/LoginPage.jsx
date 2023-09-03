@@ -3,26 +3,50 @@ import { Link, Navigate } from "react-router-dom";
 import axios from 'axios'
 import { UserContext } from "../UserContext";
 
+
+import Cookies from "js-cookie";
+
+
 export default function LoginPage() {
     const [email,setEmail] = useState('');
     const  [password,setPassword] = useState('');
     const [redirect, setRedirect] = useState(false)
     const {setUser} = useContext(UserContext);
 
+    
+    async function handleLoginSubmit(ev, credentials) {
+      ev.preventDefault();  
+      
+      try {
+        const response = await axios.get('https://booking-kohl-five.vercel.app/api/user', credentials);
+    
+        if (response.status === 200) {
+          const userDataResponse = await axios.get('https://booking-kohl-five.vercel.app/api/user', {
+            headers: {
+              Authorization: `Bearer ${response.data.token}`
+            }
+          });
+          const userData = userDataResponse.data;
+    
+          Cookies.set('token', response.data.token);
+          Cookies.set('user', JSON.stringify(userData));
+    
 
-      async function handleLoginSubmit(ev){
-        ev.preventDefault();
-        try{
-            const response = await axios.post('/login', {email,password})
-            setUser(response.data);
-            console.log('login',response);
-            alert('Login successful')
-            setRedirect(true)
-            console.log('redirecion',setRedirect);
-        } catch (e) {
-            alert('Login failed')
+          setUser(userData);
+    
+          console.log('Perfil de usuario obtenido:', userData);
+          setRedirect(true);
+          console.log('Redirección', setRedirect);
+        } else {
+          alert('Inicio de sesión fallido');
         }
+      } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+        alert('Inicio de sesión fallido');
+      }
     }
+    
+    
 
     if(redirect) {
         return <Navigate to={'/'} />
@@ -36,7 +60,7 @@ export default function LoginPage() {
                     onSubmit={handleLoginSubmit}>
                     <input 
                         type="email" 
-                        placeholder="your@email.com" 
+                        placeholder="fre@gmail.com | write this email for start" 
                         value={email}
                         onChange={ev => setEmail(ev.target.value)}/>
                     <input 

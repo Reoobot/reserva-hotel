@@ -1,11 +1,12 @@
 import { useContext, useState } from "react"
 import { UserContext } from "../UserContext"
-import { Navigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from 'axios'
 import PlacesPage from "./PlacesPage"
 import AccountNav from "../AccountNav"
 
 export default function ProfilePage() {
+    const navigate = useNavigate();
     const [redirect,setRedirect] = useState(null);
     const {ready,user,setUser} = useContext(UserContext)
     let {subpage} = useParams();
@@ -15,22 +16,21 @@ export default function ProfilePage() {
    
 
     async function logout() {
-        await axios.post('/logout');
+        await axios.get("https://booking-kohl-five.vercel.app/api/user-places");
         setRedirect('/')
         setUser(null);
-        console.log('miomio',setUser);
+       
     }
 
     if(!ready) {
         return 'Loadin...'
     }
  
-    if(ready && !user && !redirect) {
-        return <Navigate to={'/login'} />
-    }
-
-    if(redirect) {
-        return <Navigate to={redirect}/>
+    if (redirect) {
+        // console.log('Antes de navigate', redirect);
+        navigate(redirect);
+        // console.log('Después de navigate', redirect);
+        return null;
     }
     return (
         <div>

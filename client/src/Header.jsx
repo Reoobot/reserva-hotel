@@ -8,24 +8,26 @@ export default function Header() {
     const { user, setUser } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
 
+   
+
     useEffect(() => {
-        const token = Cookies.get('token'); 
-        if (token) {
-            axios.get('/profile', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }).then(({ data }) => {
-                setUser(data);
-             
-                setLoading(false);
-            }).catch(() => {
-                setLoading(false);
-            });
-        } else {
-            setLoading(false);
-        }
-    }, [setUser]);
+      const token = Cookies.get('token');
+      if (token) {
+          axios.get('https://booking-kohl-five.vercel.app/api/user')
+              .then(({ data }) => {
+                  // console.log('Datos del perfil:', data); // Verifica los datos en la consola
+                  setUser(data);
+                  setLoading(false);
+              })
+              .catch((error) => {
+                  // console.error('Error al obtener datos del perfil:', error); // Maneja errores adecuadamente
+                  setLoading(false);
+              });
+      } else {
+          setLoading(false);
+      }
+  }, [setUser]);
+
 
     return (
       

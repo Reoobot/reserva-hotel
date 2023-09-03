@@ -1,6 +1,5 @@
 
 import { Route,Routes } from 'react-router-dom'
-import './App.css'
 import IndexPage from './pages/IndexPage'
 import LoginPage from './pages/LoginPage'
 import Layout from './Layout'
@@ -16,8 +15,8 @@ import BookingPage from './pages/BookingPage'
 
 
 //ojo con locahot3000
-axios.defaults.baseURL = 'http://localhost:4001';
-axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'https://booking-kohl-five.vercel.app'
+axios.defaults.withCredentials = false;
 
 function App() {
 
@@ -36,7 +35,6 @@ function App() {
           <Route path='/place/:id' element={<PlacePage/>}/>
           <Route path='/account/bookings' element={<BookingsPage/>}/>
           <Route path='/account/bookings/:id' element={<BookingPage/>}/>
-         
           </Route>
         </Routes>   
     </UserContextProvider>

@@ -2,21 +2,23 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BokingWidget from "../BookingWidget";
-import PlaceGallery from "../PlaceGallery";
+
 import AddressLink from "../AddressLink";
+import PlaceGallery from "../PlaceGallery";
+
 
 export default function PlacePage() {
     const {id} = useParams();
     const [place,setPlace] = useState(null);
-    const [showAllPhotos,setShowAllPhotos] = useState(false);
+ 
     
     useEffect(()=>{
         if(!id) {
             return;
         }
-        axios.get(`/places/${id}`).then(response =>{
+        axios.get(`https://booking-kohl-five.vercel.app/api/places/${id}`).then(response =>{
             setPlace(response.data)
-            console.log('que me trae',response);
+            // console.log('que me trae',response);
 
         });
     },[id])
@@ -27,6 +29,10 @@ export default function PlacePage() {
         <div className="mt-4 bg-gray-100 -mx-8 px-8 pt-8">
         <h1 className="text-2xl">{place?.title}</h1>
         <AddressLink>{place.address}</AddressLink>
+        {/* <div className="w-40">
+
+        <RunGallery place={place}/>
+        </div> */}
         <PlaceGallery place={place} />
         <div className="mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-2">
           <div>
