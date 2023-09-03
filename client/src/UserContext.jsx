@@ -10,11 +10,11 @@ export function UserContextProvider({children}){
     const [user,setUser] = useState(null);
     const [ready,setReady] = useState(false);
     useEffect(() => {
-      axios.get('https://booking-kohl-five.vercel.app/api/user')
+      axios.get('https://booking-sable-nine.vercel.app/api/user')
           .then(({data}) => {
               setUser(data);
               setReady(true);
-              // console.log('mi profile',response.data);
+              
           })
           .catch((error) => {
               console.error(error);

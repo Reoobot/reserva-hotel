@@ -16,7 +16,7 @@ export default function ProfilePage() {
    
 
     async function logout() {
-        await axios.get("https://booking-kohl-five.vercel.app/api/user-places");
+        await axios.get("https://booking-sable-nine.vercel.app/api/user-places");
         setRedirect('/')
         setUser(null);
        

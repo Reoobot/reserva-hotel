@@ -15,7 +15,7 @@ import BookingPage from './pages/BookingPage'
 
 
 //ojo con locahot3000
-axios.defaults.baseURL = 'https://booking-kohl-five.vercel.app'
+axios.defaults.baseURL = 'https://booking-sable-nine.vercel.app/'
 axios.defaults.withCredentials = false;
 
 function App() {

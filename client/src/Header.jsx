@@ -13,7 +13,7 @@ export default function Header() {
     useEffect(() => {
       const token = Cookies.get('token');
       if (token) {
-          axios.get('https://booking-kohl-five.vercel.app/api/user')
+          axios.get('https://booking-sable-nine.vercel.app/api/user')
               .then(({ data }) => {
                   // console.log('Datos del perfil:', data); // Verifica los datos en la consola
                   setUser(data);

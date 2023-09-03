@@ -3,15 +3,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AddressLink from "../AddressLink";
-import PlaceGallery from "../PlaceGallery";
 import BookingDate from "../BookingDate";
-
+import PlaceImg from "../PlaceImg";
 export default function BookingPage(){
     const {id} = useParams();
     const [booking,setBooking] = useState(null);
     useEffect(()=>{
         if(id){
-            axios.get('https://booking-kohl-five.vercel.app/api/bookings').then(response => {
+            axios.get('https://booking-sable-nine.vercel.app/api/bookings').then(response => {
                const foundBooking = response.data.find(({_id})=>_id === id)
                 if (foundBooking) {
                     setBooking(foundBooking)
@@ -37,7 +36,7 @@ export default function BookingPage(){
       <div className="text-3xl">Є {booking.price}</div>
     </div>
   </div>
-  <PlaceGallery place={booking.place} />
+      <PlaceImg place={booking.place}/>
 </div>
 
     );

@@ -26,7 +26,7 @@ export default function PlacesFormPage(){
         if(!id){
             return;
         }
-        axios.get('https://booking-kohl-five.vercel.app/api/places/'+id).then(response => {
+        axios.get('https://booking-sable-nine.vercel.app/api/places/'+id).then(response => {
             const {data} = response;
             setTitle(data.title);
             setAddress(data.address);

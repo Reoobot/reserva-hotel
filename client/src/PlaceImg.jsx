@@ -10,7 +10,7 @@ export default function PlaceImg({ place, index = 0, className = 'object-cover' 
       {place.photos[index] && (
         <img
           className="rounded-2xl aspect-square"
-          src={`/public/${place.photos[0]}`}
+          src={place.photos[0]}
           alt={place.title}
         />
       )}
